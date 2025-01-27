@@ -1,0 +1,32 @@
+# Compile this file for changes to take effect:
+# pip-compile -U --resolver=backtracking
+
+boto3
+psycopg2
+uwsgi
+
+django<=6
+dj-database-url
+django-storage-url
+whitenoise
+easy-thumbnails
+
+# key requirements for django CMS
+django-cms>=4.1.0
+djangocms-versioning>=2.0.0
+djangocms-alias>=2.0.0
+
+# optional, but used in most projects
+djangocms-admin-style>=3.2.2
+
+# the next-gen text editor
+djangocms-text
+
+
+# optional django CMS frontend
+djangocms-frontend
+
+django-filer
+
+
+pip-tools  # needed for compilation of this file into requirements.txt, see start of file
