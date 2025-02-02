@@ -4,5 +4,5 @@ from .views import GistView
 app_name = "gist"
 
 urlpatterns = [
-    re_path("", JobView.as_view(), name="gist-list"),
+    re_path("", GistView.as_view(), name="gist-list"),
 ]
