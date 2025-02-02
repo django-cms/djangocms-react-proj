@@ -27,7 +27,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 INSTALLED_APPS = [
     'backend',
-    'src.gist',
+    'apps.gist',
 
     # optional, but used in most projects
     'djangocms_admin_style',
