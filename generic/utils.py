@@ -1,35 +1,43 @@
 import json
 import os
 
-def get_css_and_js_link_from_vite_assets(type):
+import json
+from typing import List, Tuple
+from pathlib import Path
+
+def get_css_and_js_link_from_vite_assets(project_type: str) -> Tuple[List[str], List[str], List[str]]:
     """
-    We read the vite diretory bath of the build from the manifest
-    file and then use that to find our static assets to load the
-    react application
+    Retrieve CSS and JS links from Vite asset manifest.
+
+    Args:
+        project_type (str): The type/name of the project build.
+
+    Returns:
+        Tuple containing:
+        - CSS links
+        - JS links
+        - Main JS links
     """
-    css_links = []
-    js_links = []
-    main_js_links = []
-    asset_manifest = open("backend/static/js/" + type + "/build/.vite/manifest.json").read()
-    asset_manifest_dict = json.loads(asset_manifest)
-    for key, value in asset_manifest_dict.items():
-        if key == "index.html":
-            """
-            {'index.html': 
-            {'file': 'assets/index-BtVi8doP.js', 'name': 'index', 'src': 'index.html', 'isEntry': True, 
-            'css': ['assets/index-n_ryQ3BS.css'], 
-            'assets': ['assets/react-CHdo91hT.svg']}, 
-            'src/assets/react.svg': {'file': 'assets/react-CHdo91hT.svg', 
-            'src': 'src/assets/react.svg'
-            }
-            }
-            """
-            full_js_link = "js/" + type + "/build/" + value.get("file")
-            js_links = [full_js_link]
-            main_js_links = [full_js_link]
-            css_file = "js/" + type + "/build/" + value.get("css")[0]
-            css_links = [css_file]
-    print("DEBUG" * 100)
-    print(css_links, js_links, main_js_links)
-    print("DEBUG" * 100)
+    # Construct the path to the manifest file
+    manifest_path = Path(f"backend/static/js/{project_type}/build/.vite/manifest.json")
+
+    try:
+        # Read and parse the manifest file
+        with manifest_path.open('r') as manifest_file:
+            asset_manifest_dict = json.load(manifest_file)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        print(f"Error reading manifest file: {e}")
+        return [], [], []
+
+    # Extract entry point (index.html) information
+    entry_point = asset_manifest_dict.get('index.html', {})
+
+    # Construct full paths for assets
+    base_path = f"js/{project_type}/build/"
+
+    css_links = [base_path + entry_point.get('css', [''])[0]] if entry_point.get('css') else []
+    js_links = [base_path + entry_point.get('file', '')] if entry_point.get('file') else []
+    main_js_links = js_links.copy()
+
     return css_links, js_links, main_js_links
+
