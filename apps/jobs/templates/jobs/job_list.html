@@ -2,22 +2,20 @@
 {% load cms_tags sekizai_tags static %}
 {% page_attribute "page_title" as title %}
 
-
-<h1>Hello </h1>
 {% block content %}
-  <div id="root" class="country-wrapper" data-url="{{api_url}}"
-    data-baseUrl="{% url "countries:countries-list" %}"></div>
+  <div id="root" class="jobs" data-url="{{api_url}}"
+    data-baseUrl="{% url "jobs:jobs-list" %}"></div>
 
 {% addtoblock "js" %}
     {% for main_js_link in  main_js_links %}
       {% with main_js_link as js_link %}
-        <script type="module" src="{% static main_js_link  %}" defer></script>
+        <script type="text/javascript" src="{% static main_js_link  %}"></script>
       {% endwith %}
     {% endfor %}
 
     {% for js_link in  js_links %}
       {% with js_link as js_link %}
-        <script type="module" src="{% static js_link  %}" defer></script>
+        <script type="text/javascript" src="{% static js_link  %}"></script>
       {% endwith %}
     {% endfor %}
 {% endaddtoblock %}

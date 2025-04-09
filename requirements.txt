@@ -129,6 +129,8 @@ pyproject-hooks==1.2.0
     #   pip-tools
 python-dateutil==2.9.0.post0
     # via botocore
+python-dotenv==1.1.0
+    # via -r requirements.in
 reportlab==4.2.5
     # via
     #   easy-thumbnails

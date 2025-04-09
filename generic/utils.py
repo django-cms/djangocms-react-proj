@@ -21,12 +21,12 @@ def get_css_and_js_link_from_vite_assets(project_type: str, uses_client: bool = 
     """
     # Construct the path to the manifest file
     if uses_client:
-        manifest_path = Path(f"backend/static/js/{project_type}/build/client/.vite/manifest.json")
+        manifest_path = Path(f"backend/static/js/{project_type}/build//manifest.json")
         # Construct full paths for assets
         base_path = f"js/{project_type}/build/client/"
         print(manifest_path, base_path)
     else:
-        manifest_path = Path(f"backend/static/js/{project_type}/build/.vite/manifest.json")
+        manifest_path = Path(f"backend/static/js/{project_type}/build/manifest.json")
         base_path = f"js/{project_type}/build/"
 
     # try/:
