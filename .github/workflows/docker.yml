@@ -24,6 +24,7 @@ jobs:
       - name: Pre-build container images
         run: |
           docker network create djangocmsnet
+          
           docker compose build --force-rm
 
       - name: Run the containers

@@ -6,12 +6,16 @@ from django_storage_url import dsn_configured_storage_class
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+DEBUG = os.environ.get('DEBUG') == "True"
+if DEBUG:
+    from dotenv import load_dotenv
+
+    load_dotenv()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', '<a string of random characters>')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG') == "True"
 
 ALLOWED_HOSTS = [os.environ.get('DOMAIN'),]
 if DEBUG:
@@ -27,6 +31,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 INSTALLED_APPS = [
     'backend',
+    'apps.jobs',
 
     # optional, but used in most projects
     'djangocms_admin_style',
@@ -97,6 +102,7 @@ MIDDLEWARE = [
     'cms.middleware.language.LanguageCookieMiddleware',
 ]
 
+
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
@@ -105,6 +111,7 @@ TEMPLATES = [
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
+            'debug': True,
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -227,3 +234,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 CMS_CONFIRM_VERSION4 = True
 DJANGOCMS_VERSIONING_ALLOW_DELETING_VERSIONS = True
+
+CMS_PAGE_CACHE = False
+CMS_PLACEHOLDER_CACHE = False
+CMS_PLUGIN_CACHE = False

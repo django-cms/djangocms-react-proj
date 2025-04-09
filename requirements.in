@@ -2,7 +2,7 @@
 # pip-compile -U --resolver=backtracking
 
 boto3
-psycopg2
+psycopg2-binary
 uwsgi
 
 django<=6
@@ -30,3 +30,5 @@ django-filer
 
 
 pip-tools  # needed for compilation of this file into requirements.txt, see start of file
+
+python-dotenv

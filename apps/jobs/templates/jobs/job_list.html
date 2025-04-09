@@ -1,0 +1,30 @@
+{% extends CMS_TEMPLATE %}
+{% load cms_tags sekizai_tags static %}
+{% page_attribute "page_title" as title %}
+
+{% block content %}
+  <div id="root" class="jobs" data-url="{{api_url}}"
+    data-baseUrl="{% url "jobs:jobs-list" %}"></div>
+
+{% addtoblock "js" %}
+    {% for main_js_link in  main_js_links %}
+      {% with main_js_link as js_link %}
+        <script type="text/javascript" src="{% static main_js_link  %}"></script>
+      {% endwith %}
+    {% endfor %}
+
+    {% for js_link in  js_links %}
+      {% with js_link as js_link %}
+        <script type="text/javascript" src="{% static js_link  %}"></script>
+      {% endwith %}
+    {% endfor %}
+{% endaddtoblock %}
+
+{% addtoblock "css" %}
+    {% for css_link in css_links %}
+      {% with css_link as css_link %}
+        <link href="{% static css_link %}" rel="stylesheet">
+      {% endwith %}
+    {% endfor %}
+{% endaddtoblock %}
+{% endblock content %}
