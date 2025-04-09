@@ -6,6 +6,7 @@ from django_storage_url import dsn_configured_storage_class
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+DEBUG = os.environ.get('DEBUG') == "True"
 if DEBUG:
     from dotenv import load_dotenv
 
@@ -15,7 +16,6 @@ if DEBUG:
 SECRET_KEY = os.environ.get('SECRET_KEY', '<a string of random characters>')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG') == "True"
 
 ALLOWED_HOSTS = [os.environ.get('DOMAIN'),]
 if DEBUG:
@@ -159,10 +159,6 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite://:memory:')
 DATABASES = {'default': dj_database_url.parse(DATABASE_URL)}
 
-
-print("DEBUG" * 100)
-print(DATABASES, DATABASE_URL)
-print("DEBUG" * 100)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
