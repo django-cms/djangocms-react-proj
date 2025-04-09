@@ -15,7 +15,7 @@ services:
     networks:
       - djangocmsnet
 
-    env_file: .env
+    env_file: .env-local
 
   database_default:
     # Select one of the following db configurations for the database
