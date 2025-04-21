@@ -5,7 +5,7 @@ import json
 from typing import List, Tuple
 from pathlib import Path
 
-def get_css_and_js_link_from_vite_assets(project_type: str, uses_client: bool = False) -> Tuple[List[str], List[str], List[str]]:
+def get_css_and_js_link_from_vite_assets(project_type: str, uses_client: bool = False) -> tuple[list[str], list[str], list[str]]:
     """
     Retrieve CSS and JS links from Vite asset manifest.
 
@@ -20,8 +20,10 @@ def get_css_and_js_link_from_vite_assets(project_type: str, uses_client: bool = 
         - Main JS links (entry points)
     """
     # Construct the path to the manifest file
+    # TODO: cache the result to ensure reading the file
+    # again and again.
     if uses_client:
-        manifest_path = Path(f"backend/static/js/{project_type}/build//manifest.json")
+        manifest_path = Path(f"backend/static/js/{project_type}/build/manifest.json")
         # Construct full paths for assets
         base_path = f"js/{project_type}/build/client/"
         print(manifest_path, base_path)

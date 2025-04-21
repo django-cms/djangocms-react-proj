@@ -22,6 +22,7 @@
 
 {% addtoblock "css" %}
     {% for css_link in css_links %}
+      {#  Check if with block is even required #}
       {% with css_link as css_link %}
         <link href="{% static css_link %}" rel="stylesheet">
       {% endwith %}
